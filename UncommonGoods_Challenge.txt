@@ -1,0 +1,54 @@
+﻿Question 1.
+
+
+-- Calls the columns, and sets the column names
+SELECT sessions.session_time AS date, test_experiences.experience, device_type.sessions AS device, COUNT(sessions.session_id) AS sessions, COUNT(orders.order_id), SUM(orders.revenue) 
+
+
+-- References the table names
+FROM sessions, test_experiences, device_type, orders
+
+
+-- Combines the data by date, test type, and device
+GROUP BY date, test_experiences.experience, device
+
+
+-- Orders the data from the earliest date to most recent. 
+ORDER BY test_experiences.experience;
+
+
+Question 2. 
+
+
+Comparing the A and B experiences, there is virtually no difference in visitors. There is a slight difference in number of orders, and revenue. Experience B is associated with slightly higher orders and higher revenue. The difference is very small though:
+
+
+Experience A orders -                12,016
+Experience B orders -                12,080
+
+
+Experience A revenue -        $893,484.32
+Experience B revenue -        $901,878.40
+
+
+This data only covers January 2017, and the difference is miniscule. After setting the alpha level to 0.05, I conducted Independent Samples t Tests, which yielded higher p-values. 
+
+
+Comparing Experience A and B orders:
+
+
+T-statistic = -0.0801
+P-value = 0.9362
+
+
+Comparing Experience A and B revenue:
+
+
+T-statistic = -0.1360
+P-value = 0.8920
+
+
+I failed to reject the null hypotheses. The difference in revenue and orders is statistically insignificant. 
+
+
+The next steps we could take would be to continue collecting data. The data shows that the difference in orders and revenue are statistically insignificant for the month of January, but a full year of data would give us a broader scope to make a judgment on whether there is a difference between experience A and B.
